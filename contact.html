@@ -224,7 +224,7 @@
 			  <button type="submit">Send</button>
 			</form>-->
 			
-			<form id="my-form"
+			<!--<form id="my-form"
 			  action="https://formspree.io/xqkzbgoj"
 			  method="POST"
 			>
@@ -234,6 +234,30 @@
 			  <input type="text" name="message" />
 			  <button id="my-form-button">Submit</button>
 			  <p id="my-form-status"></p>
+			</form>-->
+			
+			<form id="contactform" method="POST">
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">Name</span>
+					<input name="form-name-input" type="text" name="name" class="form-control" required>
+						</div>
+					<div class="input-group">
+						<span class="input-group-addon">Email</span>
+						<input name="form-email-input" type="email" name="_replyto" class="form-control" required>
+							</div>
+						<div class="input-group">
+							<span class="input-group-addon">Subject</span>
+							<input name="form-subject-input" type="text" name="subject" class="form-control" required>
+								</div>
+							<div class="input-group">
+								<span class="input-group-addon">Description</span>
+								<textarea name="form-description-input" name="description" class="form-control" rows="4" cols="60" required></textarea>
+							</div>
+							<input type="text" name="_gotcha" style="display:none" />
+							<button id="sendMessage">Send</button>
+								</div>
+                    
 			</form>
 
           </div>
@@ -337,53 +361,22 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="assets/js/custom.js"></script>
-	<script>
-  window.addEventListener("DOMContentLoaded", function() {
+  <script>
+  var message = "";
 
-    // get the form elements defined in your form HTML above
-    
-    var form = document.getElementById("my-form");
-    var button = document.getElementById("my-form-button");
-    var status = document.getElementById("my-form-status");
-
-    // Success and Error functions for after the form is submitted
-    
-    function success() {
-      form.reset();
-      button.style = "display: none ";
-      status.innerHTML = "Thanks!";
-    }
-
-    function error() {
-      status.innerHTML = "Oops! There was a problem.";
-    }
-
-    // handle the form submission event
-
-    form.addEventListener("submit", function(ev) {
-      ev.preventDefault();
-      var data = new FormData(form);
-      ajax(form.method, form.action, data, success, error);
+$("#sendMessage").on("click", function() {
+    message = $("#contactform").serialize();
+    $.ajax({
+        url: "//formspree.io/vamshi95@gmail.com", 
+        method: "POST",
+        data: {message: message},
+        dataType: "json"
     });
-  });
-  
-  // helper function for sending an AJAX request
-
-  function ajax(method, url, data, success, error) {
-    var xhr = new XMLHttpRequest();
-    xhr.open(method, url);
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState !== XMLHttpRequest.DONE) return;
-      if (xhr.status === 200) {
-        success(xhr.response, xhr.responseType);
-      } else {
-        error(xhr.status, xhr.response, xhr.responseType);
-      }
-    };
-    xhr.send(data);
-  }
+    alert('Thanks for the email, we\'ll be in touch promptly.');
+    return false;
+});
 </script>
+	
 </body>
 
 </html>
