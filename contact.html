@@ -367,7 +367,7 @@
 $("#sendMessage").on("click", function() {
     message = $("#contactform").serialize();
     $.ajax({
-        url: "//formspree.io/vamshi95@gmail.com", 
+        url: "https://formspree.io/vamshi95@gmail.com", 
         method: "POST",
         data: {message: message},
         dataType: "json"
