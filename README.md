@@ -1,2 +1,1 @@
-# innologics
-innologics website
+# Website
